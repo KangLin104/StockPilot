@@ -20,8 +20,10 @@ export const connectToDatabase = async () =>{
 
     if(cached.conn) return cached.conn;
 
-    if(cached.promise) {
-        cached.promise =mongoose.connect(MONGODB_URL, {bufferCommands:false})
+    if (!cached.promise) {
+        cached.promise = mongoose.connect(MONGODB_URL, {
+            bufferCommands: false,
+        });
     }
 
     try{
@@ -32,4 +34,5 @@ export const connectToDatabase = async () =>{
     }
 
     console.log('connected to mongo')
+    return cached.conn;
 }
